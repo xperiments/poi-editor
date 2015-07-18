@@ -105,3 +105,7 @@ ul.c-controls li a:hover {
 .poi-item .controls {
   float: right;
 }
+
+.delete{
+    cursor: pointer;
+}
