@@ -20,15 +20,15 @@ define([
                 return 'title';
             if (attributes.content === '')
                 return 'content';
-            if (Math.abs(attributes.lat) > 90) {
+            if (attributes.lat !== '' && Math.abs(parseFloat(attributes.lat)) > 90) {
                 return 'lat';
             }
-            if (Math.abs(attributes.long) > 180) {
+            if (attributes.long !== '' && Math.abs(parseFloat(attributes.long)) > 180) {
                 return 'long';
             }
-            if (attributes.image_url === ''
-                || !this.checkUrlRegexp.test(attributes.image_url))
+            if (attributes.image_url !== '' && !this.checkUrlRegexp.test(attributes.image_url)) {
                 return 'image_url';
+            }
         }
     });
     return Poi;

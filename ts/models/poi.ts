@@ -23,18 +23,17 @@ define([
                 // Empty content
                 if (attributes.content === '') return 'content';
                 // Invalid lattitude
-                if (Math.abs(attributes.lat) > 90) {
+                if (attributes.lat !== '' && Math.abs(parseFloat(attributes.lat)) > 90) {
                     return 'lat';
                 }
                 // Invalid longitude
-                if (Math.abs(attributes.long) > 180) {
+                if (attributes.long !== '' && Math.abs(parseFloat(attributes.long)) > 180) {
                     return 'long';
                 }
-                // Empty image url or invalid url format
-                if (
-                    attributes.image_url === ''
-                    || !this.checkUrlRegexp.test(attributes.image_url)
-                    ) return 'image_url';
+                // Invalid url format
+                if (attributes.image_url !== '' && !this.checkUrlRegexp.test(attributes.image_url)) {
+                    return 'image_url';
+                }
             }
         });
 
