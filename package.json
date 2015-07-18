@@ -1,0 +1,26 @@
+{
+  "name": "poi-editor",
+  "version": "1.0.0",
+  "description": "Backbone / Chaplin Tests",
+  "main": "server.js",
+  "dependencies": {
+    "spa-server": "^0.1.0"
+  },
+  "devDependencies": {
+    "spa-server": "^0.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xperiments/poi-editor.git"
+  },
+  "author": "Pedro Casaubon <xperiments@gmail.com> (http://www.xperiments.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xperiments/poi-editor/issues"
+  },
+  "homepage": "https://github.com/xperiments/poi-editor"
+}

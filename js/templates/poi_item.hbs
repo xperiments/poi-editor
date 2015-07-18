@@ -1,0 +1,21 @@
+<li class="list-group-item">
+    <div class="col-xs-12 col-sm-3">
+        <img src="{{image_url}}" alt="{{title}}" class="img-responsive img-circle" />
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <span class="name">{{title}}</span><br/>
+        {{#link "show_poi" id}}
+            <span class="glyphicon glyphicon-eye-open text-muted c-info" data-toggle="tooltip" title="Show"></span>
+            <span class="visible-xs"> <span class="text-muted">Show</span><br/></span>
+        {{/link}}
+        {{#link "edit_poi" id}}
+            <span class="glyphicon glyphicon-edit text-muted c-info" data-toggle="tooltip" title="Edir"></span>
+            <span class="visible-xs"> <span class="text-muted">Edit</span><br/></span>
+        {{/link}}
+        {{#link "new_poi"}}
+            <span class="glyphicon glyphicon-trash text-muted c-info" data-toggle="tooltip" title="Edir"></span>
+            <span class="visible-xs"> <span class="text-muted">Delete</span><br/></span>
+        {{/link}}
+    </div>
+    <div class="clearfix"></div>
+</li>

@@ -1,0 +1,47 @@
+{
+    "version": "1.5.0-beta",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "../js/"
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "./**/*.tsx",
+        "!./node_modules/**/*"
+    ],
+    "files": [
+        "./application.ts",
+        "./controllers/base/controller.ts",
+        "./controllers/pois_controller.ts",
+        "./lib/support.ts",
+        "./lib/utils.ts",
+        "./lib/view_helper.ts",
+        "./models/base/collection.ts",
+        "./models/base/model.ts",
+        "./models/poi.ts",
+        "./models/pois.ts",
+        "./routes.ts",
+        "./typings/backbone/backbone.d.ts",
+        "./typings/jquery/jquery.d.ts",
+        "./typings/requirejs/require.d.ts",
+        "./typings/underscore/underscore.d.ts",
+        "./views/base/collection_view.ts",
+        "./views/base/view.ts",
+        "./views/edit_poi_view.ts",
+        "./views/modal_view.ts",
+        "./views/poi_item_view.ts",
+        "./views/poi_view.ts",
+        "./views/pois_view.ts"
+    ]
+}
