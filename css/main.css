@@ -21,7 +21,13 @@ body {
     font-size: 1.7em;
     padding: 5px 15px;
 }
-
+.poi-info-window-container{
+    width:300px;
+    color:#000;
+}
+.poi-info-window-container > img{
+    width:299px;
+}
 .map_container{
     position: relative;
     padding-bottom: 46.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
