@@ -1,0 +1,18 @@
+<li class="list-group-item clearfix">
+    {{title}}
+    <span class="pull-right">
+        <button class="btn btn-sm btn-success poi-info-window">
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </button>
+        {{#link "edit_poi" id}}
+        <span class="btn btn-sm btn-success">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </span>
+        {{/link}}
+        {{#link "delete_poi" id}}
+        <span class="btn btn-sm btn-success poi-delete">
+            <span class="glyphicon glyphicon-trash"></span>
+        </span>
+        {{/link}}
+    </span>
+</li>

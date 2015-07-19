@@ -1,0 +1,41 @@
+
+html {
+    height: 100%
+}
+body {
+    height: 100%;
+    padding: 0 !important;
+}
+
+
+#poi-list{
+    list-style: none;
+}
+
+.poi-list-context {
+    padding: 0px;
+    min-height: 44px;
+}
+.poi-list-context .title {
+    display: inline-block;
+    font-size: 1.7em;
+    padding: 5px 15px;
+}
+
+.map_container{
+    position: relative;
+    padding-bottom: 46.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+.map_container .map_canvas{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container{
+    margin:0px 50px 0px 50px;
+}
