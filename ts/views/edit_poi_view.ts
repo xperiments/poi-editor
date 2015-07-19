@@ -7,29 +7,24 @@ define([
     'use strict';
 
     var EditPoiView = View.extend({
-
-
         template: template,
-
         autoRender: true,
         className: 'edit-poi',
         container: '#page-container',
-
         listen: {
             addedToDOM: 'focusTitle'
         },
-
         events: {
-            'submit form': 'save'
+            'submit form': 'save',
+            'reset form':'cancel'
         },
         initialize: function(a) {
             var self = this;
             this.model.on('invalid', function(model, error) {
                 this.$(`.poi-${error}`).addClass('has-error');
-            }.bind(this))
+            }.bind(this));
             Chaplin.mediator.execute('refreshMap', this.collection, new google.maps.LatLng(this.model.get('lat'),this.model.get('lng')));
             Backbone.Events.on('map-poi-updated', function(dataFromChild) {
-
                 self.model.set({
                     lat: dataFromChild.lat,
                     long: dataFromChild.long
@@ -37,6 +32,7 @@ define([
                 self.render();
             }, this);
         },
+        // sets focus to first input
         focusTitle: function() {
             var $input = this.$('#title');
             var nameLength = $input.val().length;
@@ -44,7 +40,7 @@ define([
                 selectionStart: nameLength
             });
         },
-
+        // check and persiste model if valid
         save: function(event) {
             event.preventDefault();
             // Shortcuts
@@ -59,7 +55,7 @@ define([
                 image_url: this.$('#image_url').val(),
                 dragabble: false
             });
-            /*console.log(this.model.validate())*/
+
             if (this.model.isValid()) {
                 // Add model to collection
                 if (!collection.get(this.model)) {
@@ -67,11 +63,26 @@ define([
                 }
                 // Save the model
                 this.model.save();
-                /*collection.save();*/
-                // Back to overview
+
+                // Back to listing
                 Chaplin.utils.redirectTo({ name: 'pois' });
             }
+            this.refreshMap();
         },
+        // forces google map render collection changes
+        refreshMap:function(){
+            Chaplin.mediator.execute('refreshMap', this.collection, new google.maps.LatLng(this.model.get('lat'),this.model.get('lng')));
+        },
+        // cancel editing
+        cancel:function(){
+            this.model.set({
+                dragabble: false
+            });
+            this.refreshMap();
+            Chaplin.utils.redirectTo({ name: 'pois' });
+        },
+
+        // clear error css classes
         clearErrors: function() {
             this.$('.poi-title').removeClass('has-error');
             this.$('.poi-content').removeClass('has-error');

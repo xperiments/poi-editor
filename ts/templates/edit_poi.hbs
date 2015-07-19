@@ -1,29 +1,33 @@
-<h2>Edit Poi</h2>
-
-<form>
-    <div class="form-group poi-title">
-      <label class="control-label" for="title">Title</label>
-      <input type="text" class="form-control" id="title" value="{{title}}">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Edit Poi</h3>
     </div>
-    <div class="form-group poi-content">
-      <label class="control-label" for="content">Content</label>
-      <input type="text" class="form-control" id="content"  value="{{content}}">
+    <div class="panel-body">
+        <form>
+            <div class="form-group poi-title">
+                <label class="control-label" for="title">Title</label>
+                <input type="text" class="form-control" id="title" value="{{title}}">
+            </div>
+            <div class="form-group poi-content">
+                <label class="control-label" for="content">Content</label>
+                <input type="text" class="form-control" id="content" value="{{content}}">
+            </div>
+            <div class="form-group poi-lat">
+                <label class="control-label" for="lat">Lattitude</label>
+                <input type="text" class="form-control" id="lat" value="{{lat}}">
+            </div>
+            <div class="form-group poi-long">
+                <label class="control-label" for="long">Longitude</label>
+                <input type="text" class="form-control" id="long" value="{{long}}">
+            </div>
+            <div class="form-group poi-image_url">
+                <label class="control-label" for="image_url">Image URL</label>
+                <input type="text" class="form-control" id="image_url" value="{{image_url}}">
+            </div>
+            <div class="pull-right">
+                <button type="reset" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group poi-lat">
-      <label class="control-label" for="lat">Lattitude</label>
-      <input type="text" class="form-control" id="lat"  value="{{lat}}">
-    </div>
-    <div class="form-group poi-long">
-      <label class="control-label" for="long">Longitude</label>
-      <input type="text" class="form-control" id="long"  value="{{long}}">
-    </div>
-    <div class="form-group poi-image_url">
-      <label class="control-label" for="image_url">Image URL</label>
-      <input type="text" class="form-control" id="image_url"  value="{{image_url}}">
-    </div>
-
-  <p><button type="submit">Save</button></p>
-
-</form>
-
-<p>{{#link 'pois'}}Back to overview{{/link}}</p>
+</div>

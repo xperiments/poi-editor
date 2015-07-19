@@ -5,64 +5,54 @@ define([
     'views/pois_view',
     'views/poi_view',
     'views/edit_poi_view',
+    'views/delete_view',
     'views/map/marker-collection-view',
     'backbonemaps'
-], function(Controller, Pois, Poi, PoisView, PoiView, EditPoiView, MarkerCollectionView, GoogleMaps) {
+], function(Controller, Pois, Poi, PoisView, PoiView, EditPoiView, DeleteView, MarkerCollectionView, GoogleMaps) {
     'use strict';
 
     var PoisController = Controller.extend({
 
         beforeAction: function() {
+            // get shared pois collection
+            // fetch new data
             var self = this;
-            // Create a new Pois collection or preserve the existing.
-            // This prevents the Pois collection from being disposed
-            // in order to share it between controller actions.
             var pois = this.reuse('pois', Pois);
-            pois.forEach(function(poi){ poi.set({dragabble:false})});
-            // Fetch collection from storage if it’s empty.
-            if (pois.length == 0) {
-                pois.fetch().done(function(){
-                  self.view.render();
-                });
-
-            }
+            pois.fetch().done(function() {
+                self.view.render();
+            });
         },
-
+        // poi index route
         index: function() {
+            // construct view from shared collection
             var pois = this.reuse('pois');
             this.view = new PoisView({ collection: pois });
         },
-        show: function(params) {
-            //console.log('PoisController#show');
-            var pois = this.reuse('pois');
-            var poi = pois.get(params.id);
-            this.view = new PoiView({ model: poi });
-
-        },
-
+        //poi edit route
         edit: function(params) {
-            //console.log('PoisController#edit');
+            // construct view from shared collection
             var pois = this.reuse('pois');
             var poi = pois.get(params.id);
-            if( !poi ){
-                window.location.href='/'
+            if (!poi) {
+                window.location.href = '/'
                 return;
             }
-            /*pois.forEach(function(poi){ poi.set({dragabble:false})});*/
-            poi.set({dragabble:true})
-
+            poi.set({ dragabble: true })
             this.view = new EditPoiView({ model: poi, collection: pois });
-
-
         },
-
+        //poi new route
         'new': function() {
-            //console.log('PoisController#new');
-            var poi = new Poi({ dragabble:true});
+            // construct view from shared collection
+            var poi = new Poi({ dragabble: true });
             var pois = this.reuse('pois');
-            pois.forEach(function(poi){ poi.set({dragabble:false})});
             this.view = new EditPoiView({ model: poi, collection: pois });
-
+        },
+        //poi delete route
+        'delete': function(params) {
+            // construct view from shared collection
+            var pois = this.reuse('pois');
+            var poi = pois.get(params.id);
+            this.view = new DeleteView({ model: poi });
         }
 
     });

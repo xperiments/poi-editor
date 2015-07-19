@@ -4,9 +4,8 @@ define([
     'views/poi_item_view',
     'text!templates/pois.hbs',
     'views/map/marker-collection-view'
-], function(Chaplin, CollectionView, PoiItemView, template, MarkerCollectionView) {
+], function (Chaplin, CollectionView, PoiItemView, template, MarkerCollectionView) {
     'use strict';
-
     var mapView = null;
     var PoisView = CollectionView.extend({
         template: template,
@@ -15,10 +14,9 @@ define([
         container: '#page-container',
         listSelector: '#poi-list',
         animationDuration: 300,
-        initialize: function() {
+        initialize: function () {
             mapView = Chaplin.mediator.execute('getMapView', this.collection);
         }
     });
-
     return PoisView;
 });

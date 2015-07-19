@@ -14,7 +14,8 @@ define([
             addedToDOM: 'focusTitle'
         },
         events: {
-            'submit form': 'save'
+            'submit form': 'save',
+            'reset form': 'cancel'
         },
         initialize: function (a) {
             var self = this;
@@ -56,6 +57,17 @@ define([
                 this.model.save();
                 Chaplin.utils.redirectTo({ name: 'pois' });
             }
+            this.refreshMap();
+        },
+        refreshMap: function () {
+            Chaplin.mediator.execute('refreshMap', this.collection, new google.maps.LatLng(this.model.get('lat'), this.model.get('lng')));
+        },
+        cancel: function () {
+            this.model.set({
+                dragabble: false
+            });
+            this.refreshMap();
+            Chaplin.utils.redirectTo({ name: 'pois' });
         },
         clearErrors: function () {
             this.$('.poi-title').removeClass('has-error');

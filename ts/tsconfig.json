@@ -39,6 +39,7 @@
         "./typings/underscore/underscore.d.ts",
         "./views/base/collection_view.ts",
         "./views/base/view.ts",
+        "./views/delete_view.ts",
         "./views/edit_poi_view.ts",
         "./views/map/dragable-marker-view.ts",
         "./views/map/info-window.ts",

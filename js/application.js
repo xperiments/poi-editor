@@ -29,6 +29,7 @@ define([
             Chaplin.mediator.setHandler('refreshMap', this.refreshMap);
             Chaplin.mediator.setHandler('getMapView', this.getMapView);
             Chaplin.mediator.setHandler('openInfoWindow', this.openInfoWindow);
+            Chaplin.mediator.setHandler('closeInfoWindow', this.closeInfoWindow);
         },
         refreshMap: function (collection, center) {
             if (!mapView)
@@ -50,10 +51,14 @@ define([
             if (infowindow)
                 infowindow.close();
             var point = new google.maps.LatLng(model.get('lat'), model.get('lng'));
-            console.log(point);
+            map.setCenter(point);
             infowindowMarker.setPosition(point);
             infowindow.setContent(windowTemplate(model.attributes));
             infowindow.open(map, infowindowMarker);
+        },
+        closeInfoWindow: function () {
+            if (infowindow)
+                infowindow.close();
         }
     });
     return Application;

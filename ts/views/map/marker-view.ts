@@ -11,16 +11,13 @@ define([
 
         },
         mapEvents: {
-            'dragend': 'handleDragEnd',
-            /*dblclick: 'tellTheWorldAboutIt'*/
+            'dragend': 'handleDragEnd'
         },
         handleDragEnd: function(e) {
-
             Backbone.Events.trigger('map-poi-updated', {
                 lat: e.latLng.lat(),
-                long:e.latLng.lng()
-                } );
-
+                long: e.latLng.lng()
+            });
         }
 
     });

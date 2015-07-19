@@ -7,7 +7,6 @@ define([
     var MarkerCollectionView = GoogleMaps.MarkerCollectionView.extend({
         markerView: MarkerView,
         addChild: function (model) {
-            console.log(model.get('dragabble'));
             this.markerView = model.get('dragabble') ? DragableMarkerView : MarkerView;
             GoogleMaps.MarkerCollectionView.prototype.addChild.apply(this, arguments);
         }

@@ -9,7 +9,7 @@ define([
             _.bindAll(this, 'handleDragEnd');
         },
         mapEvents: {
-            'dragend': 'handleDragEnd',
+            'dragend': 'handleDragEnd'
         },
         handleDragEnd: function (e) {
             Backbone.Events.trigger('map-poi-updated', {

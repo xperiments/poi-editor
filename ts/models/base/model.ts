@@ -1,13 +1,9 @@
 define([
-  'chaplin'
+    'chaplin'
 ], function(Chaplin) {
-  'use strict';
+    'use strict';
 
-  var Model = Chaplin.Model.extend({
+    var Model = Chaplin.Model.extend({});
+    return Model;
 
-    // Place your application-specific model features here
-
-  });
-
-  return Model;
 });

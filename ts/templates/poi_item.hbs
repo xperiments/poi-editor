@@ -1,21 +1,18 @@
-<li class="list-group-item">
-    <div class="col-xs-12 col-sm-3">
-        <img src="{{image_url}}" alt="{{title}}" class="img-responsive img-circle" />
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        <span class="name">{{title}}</span><br/>
-
-            <span class="glyphicon glyphicon-eye-open text-muted c-info poi-window" data-toggle="tooltip" title="Show"></span>
-            <span class="visible-xs"> <span class="text-muted poi-window">Show</span><br/></span>
-
+<li class="list-group-item clearfix">
+    {{title}}
+    <span class="pull-right">
+        <button class="btn btn-sm btn-success poi-info-window">
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </button>
         {{#link "edit_poi" id}}
-            <span class="glyphicon glyphicon-edit text-muted c-info" data-toggle="tooltip" title="Edir"></span>
-            <span class="visible-xs"> <span class="text-muted">Edit</span><br/></span>
+        <span class="btn btn-sm btn-success">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </span>
         {{/link}}
-
-            <span class="glyphicon glyphicon-trash text-muted c-info delete" data-toggle="tooltip" title="Edir"></span>
-            <span class="visible-xs"> <span class="text-muted delete">Delete</span><br/></span>
-
-    </div>
-    <div class="clearfix"></div>
+        {{#link "delete_poi" id}}
+        <span class="btn btn-sm btn-success poi-delete">
+            <span class="glyphicon glyphicon-trash"></span>
+        </span>
+        {{/link}}
+    </span>
 </li>
