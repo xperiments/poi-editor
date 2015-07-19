@@ -47,7 +47,6 @@
         "./views/map/marker-view.ts",
         "./views/modal_view.ts",
         "./views/poi_item_view.ts",
-        "./views/poi_view.ts",
         "./views/pois_view.ts"
     ]
 }
