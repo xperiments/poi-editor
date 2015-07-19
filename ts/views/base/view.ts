@@ -29,6 +29,7 @@ define([
           templateFunc = null;
 
       if (typeof template === 'string') {
+
         // Compile the template string to a function and save it
         // on the prototype. This is a workaround since an instance
         // shouldn’t change its prototype normally.

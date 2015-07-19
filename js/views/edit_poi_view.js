@@ -1,9 +1,11 @@
 define([
     'views/base/view',
     'text!templates/edit_poi.hbs',
-    'chaplin'
-], function (View, template, Chaplin) {
+    'chaplin',
+    'views/map/marker-collection-view'
+], function (View, template, Chaplin, MarkerCollectionView) {
     'use strict';
+    var mapView;
     var EditPoiView = View.extend({
         template: template,
         autoRender: true,
@@ -15,10 +17,25 @@ define([
         events: {
             'submit form': 'save'
         },
-        initialize: function () {
+        initialize: function (a) {
             this.model.on('invalid', function (model, error) {
                 this.$(".poi-" + error).addClass('has-error');
             }.bind(this));
+            var mapOptions = {
+                center: new google.maps.LatLng(40.4000, 3.7167),
+                zoom: 2,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            if (!mapView) {
+                var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
+                console.log(map);
+                mapView = new MarkerCollectionView({
+                    collection: this.collection,
+                    map: map
+                });
+                mapView.closeChildren();
+            }
+            mapView.refresh();
         },
         focusTitle: function () {
             var $input = this.$('#title');
@@ -36,7 +53,8 @@ define([
                 content: this.$('#content').val(),
                 lat: this.$('#lat').val(),
                 long: this.$('#long').val(),
-                image_url: this.$('#image_url').val()
+                image_url: this.$('#image_url').val(),
+                dragabble: false
             });
             if (this.model.isValid()) {
                 if (!collection.get(this.model)) {

@@ -1,4 +1,4 @@
-define(['chaplin', 'jquery', 'bootstrap'], function (Chaplin) {
+define(['chaplin', 'bootstrap'], function (Chaplin, BootStrap) {
     'use strict';
     var Application = Chaplin.Application.extend({
         title: 'Pois Manager'
