@@ -16,7 +16,7 @@ define([
                 lat: e.latLng.lat(),
                 long: e.latLng.lng()
             });
-        },
+        }
     });
     return MarkerView;
 });

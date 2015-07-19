@@ -38,14 +38,10 @@ define([
                 this.trigger(topic, this);
             }, this);
         },
-        select: function () {
-            this.set("selected", true);
-        },
-        deselect: function () {
-            this.set("selected", false);
-        },
+        select: function () { },
+        deselect: function () { },
         toggleSelect: function () {
-            this.set("selected", !this.get("selected"));
+            Chaplin.mediator.execute('openInfoWindow', this);
         },
         getLatlng: function () {
             return this.getLatLng();

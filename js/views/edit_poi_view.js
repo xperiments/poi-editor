@@ -21,6 +21,7 @@ define([
             this.model.on('invalid', function (model, error) {
                 this.$(".poi-" + error).addClass('has-error');
             }.bind(this));
+            Chaplin.mediator.execute('refreshMap', this.collection, new google.maps.LatLng(this.model.get('lat'), this.model.get('lng')));
             Backbone.Events.on('map-poi-updated', function (dataFromChild) {
                 self.model.set({
                     lat: dataFromChild.lat,
@@ -28,18 +29,6 @@ define([
                 });
                 self.render();
             }, this);
-            var mapOptions = {
-                center: new google.maps.LatLng(40.4000, 3.7167),
-                zoom: 2,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
-            console.log(map);
-            var mapView = new MarkerCollectionView({
-                collection: this.collection,
-                map: map
-            });
-            mapView.refresh();
         },
         focusTitle: function () {
             var $input = this.$('#title');

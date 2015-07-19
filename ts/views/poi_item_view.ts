@@ -1,8 +1,9 @@
 define([
+    'chaplin',
     'views/modal_view',
     'views/base/view',
     'text!templates/poi_item.hbs'
-], function(ModalView, View, template) {
+], function(Chaplin,ModalView, View, template) {
     'use strict';
 
     var PoiItemView = View.extend({
@@ -15,7 +16,7 @@ define([
         },
         events: {
             'click .delete': 'delete',
-            'click .poi-show': 'showPoi'
+            'click .poi-window':'openInfoWindow'
         },
         'delete': function(event) {
             event.preventDefault();
@@ -36,13 +37,8 @@ define([
             });
             confirmDeletePoi.render();
         },
-        showPoi: function() {
-            Backbone.Events.trigger('map-show-info', {
-                model: this.model
-            });
-                        $('.info-window').hide();
-            this.model.select();
-
+        openInfoWindow:function(){
+            Chaplin.mediator.execute('openInfoWindow',this.model)
         }
     });
 

@@ -16,8 +16,9 @@ define([
           }, this );
       },*/
       addChild: function(model) {
-          console.log('paso',model.attributes.dragabble)
-        this.markerView = model.attributes.dragabble ? DragableMarkerView:MarkerView;
+
+          console.log( model.get('dragabble')  )
+        this.markerView = model.get('dragabble') ? DragableMarkerView:MarkerView;
         GoogleMaps.MarkerCollectionView.prototype.addChild.apply(this, arguments);
 
       }

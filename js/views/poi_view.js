@@ -1,8 +1,9 @@
 define([
+    'chaplin',
     'views/base/view',
     'text!templates/poi.hbs',
     'views/map/marker-collection-view'
-], function (View, template, MarkerCollectionView) {
+], function (Chaplin, View, template, MarkerCollectionView) {
     'use strict';
     var mapView = null;
     var PoiView = View.extend({
@@ -11,6 +12,7 @@ define([
         className: 'poi',
         container: '#page-container',
         initialize: function () {
+            mapView = Chaplin.mediator.execute('getMapView', this.collection);
         }
     });
     return PoiView;

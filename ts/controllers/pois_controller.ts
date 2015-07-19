@@ -11,18 +11,9 @@ define([
     'use strict';
 
     var PoisController = Controller.extend({
-        initialize:function(){
-            var self = this;
-            var pois = this.reuse('pois', Pois);
-            if (pois.length == 0) {
-                //http://stackoverflow.com/questions/9250523/how-to-wait-to-render-view-in-backbone-js-until-fetch-is-complete
-                pois.fetch().done(function(){
-                  self.view.render();
-                });
 
-            }
-        },
         beforeAction: function() {
+            var self = this;
             // Create a new Pois collection or preserve the existing.
             // This prevents the Pois collection from being disposed
             // in order to share it between controller actions.
@@ -30,37 +21,23 @@ define([
             pois.forEach(function(poi){ poi.set({dragabble:false})});
             // Fetch collection from storage if it’s empty.
             if (pois.length == 0) {
-                pois.fetch();
+                pois.fetch().done(function(){
+                  self.view.render();
+                });
 
             }
-
-
-
-
-
-
-
         },
 
         index: function() {
-            //console.log('PoisController#index');
             var pois = this.reuse('pois');
-            /*pois.forEach(function(poi){ poi.set({dragabble:false})});*/
             this.view = new PoisView({ collection: pois });
-            /*setTimeout(function(){ this.view = new PoisView({ collection: pois }); },100);*/
-            /*markerCollectionView.collection.set( new Backbone.Collection(poi) );*/
-            /*markerCollectionView.render();*/
         },
-
         show: function(params) {
             //console.log('PoisController#show');
             var pois = this.reuse('pois');
             var poi = pois.get(params.id);
-            /*pois.forEach(function(poi){ poi.set({dragabble:false})});
-            this.view = new PoiView({ model: poi });*/
+            this.view = new PoiView({ model: poi });
 
-            this.view = new PoisView({ collection: pois });
-            return false;
         },
 
         edit: function(params) {

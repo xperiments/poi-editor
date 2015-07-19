@@ -10,20 +10,14 @@ define([
 ], function (Controller, Pois, Poi, PoisView, PoiView, EditPoiView, MarkerCollectionView, GoogleMaps) {
     'use strict';
     var PoisController = Controller.extend({
-        initialize: function () {
+        beforeAction: function () {
             var self = this;
             var pois = this.reuse('pois', Pois);
+            pois.forEach(function (poi) { poi.set({ dragabble: false }); });
             if (pois.length == 0) {
                 pois.fetch().done(function () {
                     self.view.render();
                 });
-            }
-        },
-        beforeAction: function () {
-            var pois = this.reuse('pois', Pois);
-            pois.forEach(function (poi) { poi.set({ dragabble: false }); });
-            if (pois.length == 0) {
-                pois.fetch();
             }
         },
         index: function () {
@@ -33,8 +27,7 @@ define([
         show: function (params) {
             var pois = this.reuse('pois');
             var poi = pois.get(params.id);
-            this.view = new PoisView({ collection: pois });
-            return false;
+            this.view = new PoiView({ model: poi });
         },
         edit: function (params) {
             var pois = this.reuse('pois');
