@@ -12,7 +12,8 @@ define([
             'change model': 'render'
         },
         events: {
-            'click .delete': 'delete'
+            'click .delete': 'delete',
+            'click .poi-show': 'showPoi'
         },
         'delete': function (event) {
             event.preventDefault();
@@ -22,13 +23,19 @@ define([
                     var model = that.model;
                     var collection = model.collection;
                     collection.remove(model);
-                    model.dispose();
-                    collection.save();
+                    model.destroy();
                 },
                 title: 'Delete Poi',
                 body: 'Are you sure you want to delete this item?'
             });
             confirmDeletePoi.render();
+        },
+        showPoi: function () {
+            Backbone.Events.trigger('map-show-info', {
+                model: this.model
+            });
+            $('.info-window').hide();
+            this.model.select();
         }
     });
     return PoiItemView;

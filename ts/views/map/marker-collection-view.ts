@@ -7,6 +7,14 @@ define([
 
     var MarkerCollectionView = GoogleMaps.MarkerCollectionView.extend({
       markerView: MarkerView,
+      /*initialize:function(){
+          var that = this;
+          Backbone.Events.on( 'map-show-info', function ( view  ) {
+
+             that.refresh();
+
+          }, this );
+      },*/
       addChild: function(model) {
           console.log('paso',model.attributes.dragabble)
         this.markerView = model.attributes.dragabble ? DragableMarkerView:MarkerView;

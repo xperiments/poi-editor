@@ -9,11 +9,11 @@ var seed = [{"id":1,"title":"Madrid","content":"Lorem ipsum dolor sit amet, cons
   var Pois = Collection.extend({
 
     model: Poi,
-    /*url:'https://challenge-api-pedro.herokuapp.com/posts',*/
-    localStorageKey: 'pois',
+    url:'https://challenge-api-pedro.herokuapp.com/posts/',
+    /*localStorageKey: 'pois',*/
 
     // Simple fetch logic without events, callbacks or error handling.
-    fetch: function() {
+    /*fetch: function() {
       // Try to read from localStorage.
       var savedPois = window.localStorage.getItem(this.localStorageKey);
       if (savedPois) {
@@ -36,7 +36,7 @@ var seed = [{"id":1,"title":"Madrid","content":"Lorem ipsum dolor sit amet, cons
       })
       //console.log('Cars#save', JSON.stringify(this));
       window.localStorage.setItem(this.localStorageKey, JSON.stringify(this));
-    }
+    }*/
 
   });
 

@@ -7,6 +7,7 @@ define([
     'use strict';
     var mapView = null;
     var PoisView = CollectionView.extend({
+        lastViewModel: null,
         template: template,
         itemView: PoiItemView,
         className: 'pois',
@@ -29,7 +30,6 @@ define([
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
-            console.log(map);
             mapView = new MarkerCollectionView({
                 collection: this.collection,
                 map: map

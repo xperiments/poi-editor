@@ -6,14 +6,12 @@ define([
   'use strict';
     var mapView = null;
   var PoiView = View.extend({
-
     template: template,
-
     autoRender: true,
     className: 'poi',
     container: '#page-container',
     initialize:function(){
-        var mapOptions = {
+        /*var mapOptions = {
             center: new google.maps.LatLng(40.4000, 3.7167),
             zoom: 2,
             mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -29,7 +27,7 @@ define([
             mapView.closeChildren();
 
         }
-        mapView.refresh();
+        mapView.refresh();*/
     }
 
   });

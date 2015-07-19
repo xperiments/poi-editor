@@ -10,20 +10,13 @@ define([
         },
         mapEvents: {
             'dragend': 'handleDragEnd',
-            dblclick: 'tellTheWorldAboutIt'
         },
         handleDragEnd: function (e) {
-            alert('Dropped at: \n Lat: ' + e.latLng.lat() + '\n lng: ' + e.latLng.lng());
+            Backbone.Events.trigger('map-poi-updated', {
+                lat: e.latLng.lat(),
+                long: e.latLng.lng()
+            });
         },
-        tellTheWorldAboutIt: function () {
-            console.assert(this instanceof MarkerView);
-            alert('You done gone and double-clicked me!');
-            this.logIt('I hope you know that this will go down on your permanent record.');
-        },
-        logIt: function (message) {
-            console.assert(this instanceof MarkerView);
-            console.log(message);
-        }
     });
     return MarkerView;
 });

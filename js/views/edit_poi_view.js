@@ -5,7 +5,6 @@ define([
     'views/map/marker-collection-view'
 ], function (View, template, Chaplin, MarkerCollectionView) {
     'use strict';
-    var mapView;
     var EditPoiView = View.extend({
         template: template,
         autoRender: true,
@@ -18,23 +17,28 @@ define([
             'submit form': 'save'
         },
         initialize: function (a) {
+            var self = this;
             this.model.on('invalid', function (model, error) {
                 this.$(".poi-" + error).addClass('has-error');
             }.bind(this));
+            Backbone.Events.on('map-poi-updated', function (dataFromChild) {
+                self.model.set({
+                    lat: dataFromChild.lat,
+                    long: dataFromChild.long
+                });
+                self.render();
+            }, this);
             var mapOptions = {
                 center: new google.maps.LatLng(40.4000, 3.7167),
                 zoom: 2,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            if (!mapView) {
-                var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
-                console.log(map);
-                mapView = new MarkerCollectionView({
-                    collection: this.collection,
-                    map: map
-                });
-                mapView.closeChildren();
-            }
+            var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
+            console.log(map);
+            var mapView = new MarkerCollectionView({
+                collection: this.collection,
+                map: map
+            });
             mapView.refresh();
         },
         focusTitle: function () {
@@ -60,7 +64,7 @@ define([
                 if (!collection.get(this.model)) {
                     collection.push(this.model);
                 }
-                collection.save();
+                this.model.save();
                 Chaplin.utils.redirectTo({ name: 'pois' });
             }
         },

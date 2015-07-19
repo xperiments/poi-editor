@@ -10,27 +10,31 @@ define([
 ], function (Controller, Pois, Poi, PoisView, PoiView, EditPoiView, MarkerCollectionView, GoogleMaps) {
     'use strict';
     var PoisController = Controller.extend({
-        map: null,
-        markerCollectionView: null,
-        constructor: function () {
-            // Instantiate map
+        initialize: function () {
+            var self = this;
+            var pois = this.reuse('pois', Pois);
+            if (pois.length == 0) {
+                pois.fetch().done(function () {
+                    self.view.render();
+                });
+            }
         },
         beforeAction: function () {
             var pois = this.reuse('pois', Pois);
+            pois.forEach(function (poi) { poi.set({ dragabble: false }); });
             if (pois.length == 0) {
                 pois.fetch();
             }
         },
         index: function () {
             var pois = this.reuse('pois');
-            pois.forEach(function (poi) { poi.set({ dragabble: false }); });
             this.view = new PoisView({ collection: pois });
         },
         show: function (params) {
             var pois = this.reuse('pois');
             var poi = pois.get(params.id);
-            pois.forEach(function (poi) { poi.set({ dragabble: false }); });
-            this.view = new PoiView({ model: poi });
+            this.view = new PoisView({ collection: pois });
+            return false;
         },
         edit: function (params) {
             var pois = this.reuse('pois');
@@ -39,7 +43,6 @@ define([
                 window.location.href = '/';
                 return;
             }
-            pois.forEach(function (poi) { poi.set({ dragabble: false }); });
             poi.set({ dragabble: true });
             this.view = new EditPoiView({ model: poi, collection: pois });
         },

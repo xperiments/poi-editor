@@ -9,43 +9,31 @@ define([
     'backbonemaps'
 ], function(Controller, Pois, Poi, PoisView, PoiView, EditPoiView, MarkerCollectionView, GoogleMaps) {
     'use strict';
-    /*var mapOptions = {
-        center: new google.maps.LatLng(40.4000, 3.7167),
-        zoom: 2,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
-    var markerCollectionView = new MarkerCollectionView({
-        collection:new Backbone.Collection(),
-        map: map
-    });*/
+
     var PoisController = Controller.extend({
-        map: null,
-        markerCollectionView: null,
-        constructor: function() {
-            // Instantiate map
+        initialize:function(){
+            var self = this;
+            var pois = this.reuse('pois', Pois);
+            if (pois.length == 0) {
+                //http://stackoverflow.com/questions/9250523/how-to-wait-to-render-view-in-backbone-js-until-fetch-is-complete
+                pois.fetch().done(function(){
+                  self.view.render();
+                });
 
-
-
-
-
-                // Render Markers
-
-
-                /*markerCollectionView.render();*/
-
+            }
         },
         beforeAction: function() {
             // Create a new Pois collection or preserve the existing.
             // This prevents the Pois collection from being disposed
             // in order to share it between controller actions.
             var pois = this.reuse('pois', Pois);
+            pois.forEach(function(poi){ poi.set({dragabble:false})});
             // Fetch collection from storage if it’s empty.
             if (pois.length == 0) {
                 pois.fetch();
 
             }
-            /*markerCollectionView.collection = pois*/
+
 
 
 
@@ -57,8 +45,9 @@ define([
         index: function() {
             //console.log('PoisController#index');
             var pois = this.reuse('pois');
-            pois.forEach(function(poi){ poi.set({dragabble:false})});
+            /*pois.forEach(function(poi){ poi.set({dragabble:false})});*/
             this.view = new PoisView({ collection: pois });
+            /*setTimeout(function(){ this.view = new PoisView({ collection: pois }); },100);*/
             /*markerCollectionView.collection.set( new Backbone.Collection(poi) );*/
             /*markerCollectionView.render();*/
         },
@@ -67,9 +56,11 @@ define([
             //console.log('PoisController#show');
             var pois = this.reuse('pois');
             var poi = pois.get(params.id);
-            pois.forEach(function(poi){ poi.set({dragabble:false})});
-            this.view = new PoiView({ model: poi });
+            /*pois.forEach(function(poi){ poi.set({dragabble:false})});
+            this.view = new PoiView({ model: poi });*/
 
+            this.view = new PoisView({ collection: pois });
+            return false;
         },
 
         edit: function(params) {
@@ -80,7 +71,7 @@ define([
                 window.location.href='/'
                 return;
             }
-            pois.forEach(function(poi){ poi.set({dragabble:false})});
+            /*pois.forEach(function(poi){ poi.set({dragabble:false})});*/
             poi.set({dragabble:true})
 
             this.view = new EditPoiView({ model: poi, collection: pois });

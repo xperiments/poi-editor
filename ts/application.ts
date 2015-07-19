@@ -1,9 +1,5 @@
 define(['chaplin','bootstrap'], function(Chaplin, BootStrap) {
   'use strict';
-  /*Backbone.emulateHTTP = true;
-  Backbone.emulateJSON = true;*/
-
-
 
   // The application object
   // Choose a meaningful name for your application

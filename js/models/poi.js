@@ -11,7 +11,9 @@ define([
             lat: 0,
             long: 0,
             image_url: '',
-            dragabble: false
+            dragabble: false,
+            lng: 0,
+            selected: false
         },
         validate: function (attributes) {
             if (attributes.title === '')
@@ -30,12 +32,6 @@ define([
         },
         constructor: function () {
             _.bindAll(this, 'select', 'deselect', 'toggleSelect', 'getLatLng', 'getLatlng');
-            this.defaults = _.extend({}, {
-                lat: 0,
-                lng: 0,
-                selected: false,
-                title: ""
-            }, this.defaults);
             Model.prototype.constructor.apply(this, arguments);
             this.on("change:selected", function (model, isSelected) {
                 var topic = isSelected ? "selected" : "deselected";
@@ -57,6 +53,11 @@ define([
         getLatLng: function () {
             return new google.maps.LatLng(this.get("lat"), this.get("lng"));
         },
+        url: 'https://challenge-api-pedro.herokuapp.com/posts/',
+        destroy: function (options) {
+            var opts = _.extend({ url: this.url + this.id }, options || {});
+            return Chaplin.Model.prototype.destroy.call(this, opts);
+        },
         save: function (attrs, options) {
             options || (options = {});
             attrs || (attrs = _.clone(this.attributes));
@@ -67,6 +68,9 @@ define([
             delete post.dragabble;
             attrs.dragabble = false;
             options.data = JSON.stringify({ post: post });
+            if (!this.isNew())
+                options.url = this.url + this.id;
+            options.contentType = "application/json";
             return Chaplin.Model.prototype.save.call(this, attrs, options);
         }
     });
